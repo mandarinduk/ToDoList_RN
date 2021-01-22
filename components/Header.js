@@ -32,15 +32,19 @@ const NaviText = Styled.Text`
     color: #FFFEF8;
 `;
 
-export default function Header({ pageName }) {
+export default function Header({ pageName, navigation }) {
   return (
     <NaviBox>
       <NaviTextContainer>
-        <NaviText>Mission</NaviText>
+        <NaviText onPress={() => navigation.navigate("ToDoList")}>
+          Mission
+        </NaviText>
         <ToDoBar selected={pageName} />
       </NaviTextContainer>
       <NaviTextContainer>
-        <NaviText>Completed!</NaviText>
+        <NaviText onPress={() => navigation.navigate("DoneList")}>
+          Completed!
+        </NaviText>
         <DoneBar selected={pageName} />
       </NaviTextContainer>
     </NaviBox>
