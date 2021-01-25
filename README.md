@@ -14,4 +14,4 @@
 - styled-components
 
 ## Preview
-![](RN_TodoApp.mov)
+![](RN_TodoApp.gif)
