@@ -16,7 +16,7 @@ const Container = Styled.View`
     border-radius: 6px;
 `;
 
-const CheckBoxContainer = Styled.View`
+const CheckBoxContainer = Styled.TouchableOpacity`
     flex: 1;
     align-items: center;
 `;
@@ -25,13 +25,12 @@ const Text = Styled.Text`
     flex: 5;
     font-size: 18px;
     font-weight: 900;
-    color: ${({ pageName }) => (pageName === "doneList" ? "gray" : "null")}
+    color: ${({ pageName }) => (pageName === "doneList" ? "gray" : "null")};
     text-decoration-line: ${({ pageName }) =>
-      pageName === "doneList" ? "line-through" : "none"}
-
+      pageName === "doneList" ? "line-through" : "none"};
 `;
 
-const TrashContainer = Styled.View`
+const TrashContainer = Styled.TouchableOpacity`
     flex: 1;
     height: 100%;
     justify-content: center;
@@ -40,10 +39,19 @@ const TrashContainer = Styled.View`
     border-color: #E1E1E1;
 `;
 
-export default function ToDoList({ pageName }) {
+export default function ToDoList({
+  pageName,
+  todoValue,
+  moveToDone,
+  moveToToDo,
+  removeToDo,
+  removeDone,
+}) {
   return (
     <Container>
-      <CheckBoxContainer>
+      <CheckBoxContainer
+        onPress={pageName === "toDoList" ? moveToDone : moveToToDo}
+      >
         {pageName === "toDoList" && (
           <FontAwesome name="circle-o" size={28} color="#BDBDBD" />
         )}
@@ -51,8 +59,10 @@ export default function ToDoList({ pageName }) {
           <FontAwesome name="check-circle" size={28} color="#C29AE5" />
         )}
       </CheckBoxContainer>
-      <Text pageName={pageName}>this is card</Text>
-      <TrashContainer>
+      <Text pageName={pageName}>{todoValue}</Text>
+      <TrashContainer
+        onPress={pageName === "toDoList" ? removeToDo : removeDone}
+      >
         <FontAwesome5 name="trash" size={24} color="#BDBDBD" />
       </TrashContainer>
     </Container>
