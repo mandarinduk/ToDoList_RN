@@ -14,4 +14,4 @@
 - styled-components
 
 ## Preview
-![](RN_TodoApp.gif)
+<img src="https://user-images.githubusercontent.com/66003183/105684073-cd788600-5f37-11eb-9278-20b0d616fe2f.gif" width="320" height="500" />
