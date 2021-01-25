@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { KeyboardAvoidingView, ScrollView } from "react-native";
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  View,
+  SafeAreaView,
+} from "react-native";
 import Styled from "styled-components/native";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -10,25 +15,20 @@ import Card from "../components/Card";
 
 const KeyboardAvoiding = Styled.KeyboardAvoidingView`
     flex: 1;
-    border: 2px green;
 `;
 
-const Container = Styled.View`
-    flex: 1;
+const Container = Styled.SafeAreaView`
+    flex: 4;
     background-color: #FFFEF8;
 `;
 
 const CardContainer = Styled.ScrollView`
-    flex: 1;
-    border: 2px red;
 `;
 
-const InputContainer = Styled.KeyboardAvoidingView`
-    border: 2px yellow;
+const InputContainer = Styled.View`
 `;
 
 const InputBox = Styled.View`
-    border: 2px blue;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -43,14 +43,14 @@ const Input = Styled.TextInput`
     font-weight: 400;
 `;
 
-export default function ToDoList() {
+export default function ToDoList({ navigation }) {
   const [value, onChangeText] = useState();
   const todoList = useSelector((store) => store.toDos);
 
   return (
-    <KeyboardAvoiding behavior="padding" enabled>
+    <KeyboardAvoiding behavior={Platform.OS == "ios" ? "padding" : "height"}>
       <Container>
-        <Header pageName={"toDoList"} />
+        <Header pageName={"toDoList"} navigation={navigation} />
         <CardContainer>
           <Card pageName={"toDoList"} />
           <Card pageName={"toDoList"} />
@@ -77,6 +77,7 @@ export default function ToDoList() {
           <FontAwesome name="plus" size={24} color="black" />
         </InputBox>
       </Container>
+      <View style={{ flex: 1 }} />
     </KeyboardAvoiding>
   );
 }

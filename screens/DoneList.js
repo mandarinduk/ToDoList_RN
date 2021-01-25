@@ -1,7 +1,39 @@
 import React from "react";
-import Styled from "styled-components";
-import { Text } from "react-native";
+import { ScrollView, View, SafeAreaView } from "react-native";
+import Styled from "styled-components/native";
 
-export default function DoneList() {
-  return <Text>This is doneList Page</Text>;
+import Header from "../components/Header";
+import Card from "../components/Card";
+
+const Container = Styled.SafeAreaView`
+    flex: 4;
+    background-color: #FFFEF8;
+`;
+
+const CardContainer = Styled.ScrollView`
+`;
+
+export default function DoneList({ navigation }) {
+  return (
+    <Container>
+      <Header pageName={"doneList"} navigation={navigation} />
+      <CardContainer>
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+        <Card pageName={"doneList"} />
+      </CardContainer>
+    </Container>
+  );
 }

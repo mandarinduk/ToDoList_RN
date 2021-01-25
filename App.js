@@ -31,6 +31,7 @@ export default function App() {
               fontWeight: "900",
               fontSize: 23,
             },
+            headerLeft: null,
           }}
         >
           <Stack.Screen name="ToDoList" component={ToDoList} />

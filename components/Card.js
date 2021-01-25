@@ -25,6 +25,10 @@ const Text = Styled.Text`
     flex: 5;
     font-size: 18px;
     font-weight: 900;
+    color: ${({ pageName }) => (pageName === "doneList" ? "gray" : "null")}
+    text-decoration-line: ${({ pageName }) =>
+      pageName === "doneList" ? "line-through" : "none"}
+
 `;
 
 const TrashContainer = Styled.View`
@@ -47,7 +51,7 @@ export default function ToDoList({ pageName }) {
           <FontAwesome name="check-circle" size={28} color="#C29AE5" />
         )}
       </CheckBoxContainer>
-      <Text>this is card</Text>
+      <Text pageName={pageName}>this is card</Text>
       <TrashContainer>
         <FontAwesome5 name="trash" size={24} color="#BDBDBD" />
       </TrashContainer>
