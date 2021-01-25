@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import {
-  KeyboardAvoidingView,
-  ScrollView,
-  View,
-  SafeAreaView,
-} from "react-native";
+import { View } from "react-native";
 import Styled from "styled-components/native";
-import { FontAwesome } from "@expo/vector-icons";
 
 import { useSelector, useDispatch } from "react-redux";
+import { addToDo, moveDone, removeToDo } from "../store/action/action";
 
 import Header from "../components/Header";
 import Card from "../components/Card";
+
+import { FontAwesome } from "@expo/vector-icons";
 
 const KeyboardAvoiding = Styled.KeyboardAvoidingView`
     flex: 1;
@@ -23,9 +20,6 @@ const Container = Styled.SafeAreaView`
 `;
 
 const CardContainer = Styled.ScrollView`
-`;
-
-const InputContainer = Styled.View`
 `;
 
 const InputBox = Styled.View`
@@ -43,30 +37,32 @@ const Input = Styled.TextInput`
     font-weight: 400;
 `;
 
+const PlusBox = Styled.TouchableOpacity`
+`;
+
 export default function ToDoList({ navigation }) {
   const [value, onChangeText] = useState();
+  const [id, setId] = useState(1);
   const todoList = useSelector((store) => store.toDos);
+  const dispatch = useDispatch();
 
+  console.log("todoList render");
   return (
     <KeyboardAvoiding behavior={Platform.OS == "ios" ? "padding" : "height"}>
       <Container>
         <Header pageName={"toDoList"} navigation={navigation} />
         <CardContainer>
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
-          <Card pageName={"toDoList"} />
+          {todoList.map((todo) => {
+            return (
+              <Card
+                key={todo.id}
+                pageName={"toDoList"}
+                todoValue={todo.desc}
+                moveToDone={() => dispatch(moveDone(todo.id))}
+                removeToDo={() => dispatch(removeToDo(todo.id))}
+              />
+            );
+          })}
         </CardContainer>
         <InputBox>
           <Input
@@ -74,7 +70,15 @@ export default function ToDoList({ navigation }) {
             value={value}
             placeholder="해야 할 일"
           />
-          <FontAwesome name="plus" size={24} color="black" />
+          <PlusBox
+            onPress={() => {
+              dispatch(addToDo(id, value));
+              setId(id + 1);
+              onChangeText("");
+            }}
+          >
+            <FontAwesome name="plus" size={24} color="black" />
+          </PlusBox>
         </InputBox>
       </Container>
       <View style={{ flex: 1 }} />
