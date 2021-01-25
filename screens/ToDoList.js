@@ -8,6 +8,8 @@ import {
 import Styled from "styled-components/native";
 import { FontAwesome } from "@expo/vector-icons";
 
+import { useSelector, useDispatch } from "react-redux";
+
 import Header from "../components/Header";
 import Card from "../components/Card";
 
@@ -43,6 +45,7 @@ const Input = Styled.TextInput`
 
 export default function ToDoList({ navigation }) {
   const [value, onChangeText] = useState();
+  const todoList = useSelector((store) => store.toDos);
 
   return (
     <KeyboardAvoiding behavior={Platform.OS == "ios" ? "padding" : "height"}>
@@ -65,16 +68,14 @@ export default function ToDoList({ navigation }) {
           <Card pageName={"toDoList"} />
           <Card pageName={"toDoList"} />
         </CardContainer>
-        <InputContainer>
-          <InputBox>
-            <Input
-              onChangeText={(text) => onChangeText(text)}
-              value={value}
-              placeholder="해야 할 일"
-            />
-            <FontAwesome name="plus" size={24} color="black" />
-          </InputBox>
-        </InputContainer>
+        <InputBox>
+          <Input
+            onChangeText={(text) => onChangeText(text)}
+            value={value}
+            placeholder="해야 할 일"
+          />
+          <FontAwesome name="plus" size={24} color="black" />
+        </InputBox>
       </Container>
       <View style={{ flex: 1 }} />
     </KeyboardAvoiding>

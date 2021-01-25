@@ -18,7 +18,6 @@ const Container = Styled.View`
 
 const CheckBoxContainer = Styled.View`
     flex: 1;
-    /* border: 1px; */
     align-items: center;
 `;
 
