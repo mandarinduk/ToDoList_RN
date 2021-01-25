@@ -3,6 +3,8 @@ import { KeyboardAvoidingView, ScrollView } from "react-native";
 import Styled from "styled-components/native";
 import { FontAwesome } from "@expo/vector-icons";
 
+import { useSelector, useDispatch } from "react-redux";
+
 import Header from "../components/Header";
 import Card from "../components/Card";
 
@@ -22,13 +24,10 @@ const CardContainer = Styled.ScrollView`
 `;
 
 const InputContainer = Styled.KeyboardAvoidingView`
-    /* flex: 1; */
-    /* justify-content: flex-end; */
     border: 2px yellow;
 `;
 
 const InputBox = Styled.View`
-    /* flex: 1; */
     border: 2px blue;
     flex-direction: row;
     justify-content: space-between;
@@ -46,6 +45,7 @@ const Input = Styled.TextInput`
 
 export default function ToDoList() {
   const [value, onChangeText] = useState();
+  const todoList = useSelector((store) => store.toDos);
 
   return (
     <KeyboardAvoiding behavior="padding" enabled>
@@ -68,7 +68,6 @@ export default function ToDoList() {
           <Card pageName={"toDoList"} />
           <Card pageName={"toDoList"} />
         </CardContainer>
-        {/* <InputContainer behavior="padding" enabled> */}
         <InputBox>
           <Input
             onChangeText={(text) => onChangeText(text)}
@@ -77,7 +76,6 @@ export default function ToDoList() {
           />
           <FontAwesome name="plus" size={24} color="black" />
         </InputBox>
-        {/* </InputContainer> */}
       </Container>
     </KeyboardAvoiding>
   );
